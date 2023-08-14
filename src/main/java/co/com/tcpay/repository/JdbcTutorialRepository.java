@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import co.com.tcpay.dto.TestDto;
 import co.com.tcpay.model.Test;
 
 @Repository
@@ -21,10 +22,11 @@ public class JdbcTutorialRepository implements TestRepository {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<Test> findAll() {
+	public List<TestDto> findAll() { // <Test>
 		// TODO Auto-generated method stub
-		return jdbcTemplate.query("SELECT * FROM TEST", BeanPropertyRowMapper.newInstance(Test.class));
-		// converts a table row into a new instance of the specified mapped target class.
+		return jdbcTemplate.query("SELECT * FROM TEST", BeanPropertyRowMapper.newInstance(TestDto.class)); // Test.class
+		// converts a table row into a new instance of the specified mapped target
+		// class.
 	}
 
 	@Override

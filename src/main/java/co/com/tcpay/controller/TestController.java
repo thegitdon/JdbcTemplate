@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.com.tcpay.model.Test;
-import co.com.tcpay.repository.TestRepository;
+import co.com.tcpay.dto.TestDto;
+import co.com.tcpay.service.TestService;
 
 @CrossOrigin(origins = "*")
 @RestController // used to define a controller and to indicate that the return
@@ -23,14 +23,21 @@ public class TestController {
 	// updating, deleting and finding.
 
 	@Autowired // to inject TestRepository bean to local variable.
-	TestRepository testRepository;
+	// TestRepository testRepository;
+	TestService testService;
 
+	/*
+	 * @GetMapping("/tests") public ResponseEntity<List<TestDto>> getAllTutorials()
+	 * { List<TestDto> users = testRepository.findAll();
+	 * 
+	 * if (users.isEmpty()) { return new ResponseEntity<>(HttpStatus.NO_CONTENT); }
+	 * return new ResponseEntity<>(users, HttpStatus.OK); //
+	 * testRepository.findAll() }
+	 */
 	@GetMapping("/tests")
-	public ResponseEntity<List<Test>> getAllTutorials() {
-		if (testRepository.findAll().isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}
-		return new ResponseEntity<>(testRepository.findAll(), HttpStatus.OK);
+	public ResponseEntity<List<TestDto>> getAll() {
+		List<TestDto> users = testService.findAll();
+		return new ResponseEntity<>(users, HttpStatus.OK);
 	}
 
 }
